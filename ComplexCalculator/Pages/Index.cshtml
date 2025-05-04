@@ -1,18 +1,41 @@
 ﻿@page
-@model IndexModel
+@model ComplexCalculator.Pages.IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Complex Calculator";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    <form method="post">
-        <input type="text" asp-for="Num1"/>
-        <select asp-for="Operation" asp-items="Model.Operations"></select>
-        <input type="text" asp-for="Num2"/>
+<h2>Complex Calculator</h2>
 
-        <button type="submit">Calculate</button>
-    </form>
-    <div>Result: @ViewData["Result"]</div>
-</div>
+<form method="post">
+    <div>
+        <label>First Complex Number:</label>
+        <input asp-for="Num1" class="form-control" />
+    </div>
+
+    <div>
+        <label>Operation:</label>
+        <select asp-for="Operation" asp-items="Model.Operations" class="form-select"></select>
+    </div>
+
+    <div>
+        <label>Second Complex Number:</label>
+        <input asp-for="Num2" class="form-control" />
+    </div>
+
+    <div>
+        <label>Display Format:</label>
+        <select asp-for="Format" class="form-select">
+            <option value="algebraic">Algebraic (a+bi)</option>
+            <option value="exponential">Exponential (r·e^(iθ))</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Calculate</button>
+</form>
+
+@if (ViewData["Result"] != null)
+{
+    <div class="alert alert-success mt-3">
+        <strong>Result:</strong> @ViewData["Result"]
+    </div>
+}
